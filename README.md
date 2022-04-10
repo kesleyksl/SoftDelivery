@@ -6,7 +6,6 @@
 
     - Iniciar pedido de transporte (seleciona ponto de origem e ponto de destino);
 
-
     - Notificar pedido de transporte para veículos disponíveis em um "raio" de 10 blocos;
 ### Fracasso 
     - Caso não encontre veículos disponíveis no raio inícial a busca é ampliada em 5 blocos até atingir os limites da matriz;
