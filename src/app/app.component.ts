@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { DriverService } from './services/driver.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'SoftDelivery';
+
+  public boardSize: number = environment.boardSize;
+  private driverQuantity: number = environment.driverQuantity
+  constructor(private driverService: DriverService){}
+
+  ngOnInit() {
+    this.driverService.createDrivers(this.driverQuantity);
+  }
 }

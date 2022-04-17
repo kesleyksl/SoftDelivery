@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'sd-board-field',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardFieldComponent implements OnInit {
 
+  @Input() public driver: string = '';
   constructor() { }
 
   ngOnInit(): void {

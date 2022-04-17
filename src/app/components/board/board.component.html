@@ -1,8 +1,15 @@
-<div    class="board">
-    <div    class="board__line"    
-            *ngFor="let size of [].constructor(boardSize)">
+<section    class="container">
+
+    <div    class="board">
+        <div    class="board__line"    
+                *ngFor="let size of [].constructor(boardSize); let y = index">
         
         <sd-board-field class="board__line--field" 
-                        *ngFor="let size of [].constructor(boardSize)"></sd-board-field>
+                        *ngFor="let size of [].constructor(boardSize); let x = index"
+                        [driver]="getDriverAtPosition(x, y)">
+        
+        
+        </sd-board-field>
     </div>
 </div>
+</section>

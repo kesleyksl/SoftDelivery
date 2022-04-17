@@ -1,6 +1,10 @@
-.board {
-    &__line {
-        display: flex;
-        flex-flow: row;
+.container {
+    display: flex;
+    justify-content: center;
+    .board {
+        &__line {
+            display: flex;
+            flex-flow: row;
+        }
     }
 }
