@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Driver } from '../models/driver.type';
+import { Driver, Position } from '../models/driver.type';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class DriverService {
 
   private drivers$: BehaviorSubject<Driver[]> = new BehaviorSubject<Driver[]>([]);
   private boardSize: number = environment.boardSize;
-  
+
   constructor() { }
 
   getDrivers(): Observable<Driver[]> {
@@ -24,11 +24,17 @@ export class DriverService {
   }
 
   createDriver() {
-    const driver: Driver = {
-      positionX: Math.floor(Math.random() * this.boardSize),
-      positionY: Math.floor(Math.random() * this.boardSize),
-      color: this.getDriverColor()
-    }
+    const driver: Driver = new Driver(
+      new Position(
+      Math.floor(Math.random() * this.boardSize),
+      Math.floor(Math.random() * this.boardSize)
+      ),
+      this.getDriverColor()
+    )
+    this.addDriver(driver);
+  }
+
+  addDriver(driver: Driver) {
     this.drivers$.value.push(driver);
     this.drivers$.next(this.drivers$.getValue());
   }

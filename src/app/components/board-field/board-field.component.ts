@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BoardFieldComponent implements OnInit {
 
-  @Input() public driver: string = '';
+  @Input() public driver: string = ''
   constructor() { }
 
   ngOnInit(): void {
