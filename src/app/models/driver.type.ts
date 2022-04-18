@@ -1,27 +1,35 @@
+import { CollisionDetector } from "../services/collision-detector.interface";
 
 export class Driver {
     private direction: Direction = Directions.values()[Math.floor(Math.random() * Directions.length)];
-    constructor(public position: Position, private carColor: string) {
 
+    constructor(public position: Position, private carColor: string) {
     }
+
     get positionX(): number {
         return this.position.x;
     }
+
     get positionY(): number {
         return this.position.y;
     }
+
     get color(): string {
         return this.carColor;
     }
-    
-    move(limit: number) {
+
+    move(limit: number, collisionDetector: CollisionDetector, ifMovedCallback: (driver: Driver, from: Position, to: Position) => void = () => {}) {
         const possibleDirections = this.direction.possibleDirections;
         let newDirection: Direction = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
 
-        const newPosition = newDirection.move(this.position);
-        if(newPosition.isValid(limit)) {
+        const currentPosition = this.position;
+
+        const newPosition = newDirection.move(currentPosition);
+        if(newPosition.isValid(limit) && !collisionDetector.hasCollision(newPosition)) {
             this.direction = newDirection;
-            this.position = newPosition
+            this.position = newPosition;
+
+            ifMovedCallback(this, currentPosition, newPosition);
         }
     }
 
@@ -64,6 +72,10 @@ export class Position {
 
     isValid(limit: number): boolean {
         return this.x >= 0 && this.y >= 0 && this.x < limit && this.y < limit;
+    }
+
+    toCoordinates(): string {
+        return `(${this.x},${this.y})`;
     }
 
 }
